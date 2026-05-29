@@ -24,5 +24,6 @@
 # ignore files and dirs with temp in the name
 *temp*
 
-
+script/depth/dataset_preprocess/hypersim/preprocess_hypersim.py
+script/depth/output/
 

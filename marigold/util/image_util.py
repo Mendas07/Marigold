@@ -36,7 +36,7 @@ from torchvision.transforms.functional import resize
 
 
 def colorize_depth_maps(
-    depth_map, min_depth, max_depth, cmap="Spectral", valid_mask=None
+    depth_map, min_depth, max_depth, cmap="inferno", valid_mask=None
 ):
     """
     Colorize depth maps.

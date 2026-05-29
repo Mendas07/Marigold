@@ -274,12 +274,24 @@ if "__main__" == __name__:
                 logging.warning(f"Existing file: '{npy_save_path}' will be overwritten")
             np.save(npy_save_path, depth_pred)
 
-            # Save as 16-bit uint png
+            # Save 16-bit (precisão)
             depth_to_save = (depth_pred * 65535.0).astype(np.uint16)
             png_save_path = os.path.join(output_dir_tif, f"{pred_name_base}.png")
+
             if os.path.exists(png_save_path):
                 logging.warning(f"Existing file: '{png_save_path}' will be overwritten")
+
             Image.fromarray(depth_to_save).save(png_save_path, mode="I;16")
+
+
+            # Save 8-bit (visualização)
+            depth_8 = (depth_pred * 255).clip(0, 255).astype(np.uint8)
+            path_8 = os.path.join(output_dir_tif, f"{pred_name_base}_vis.png")
+
+            if os.path.exists(path_8):
+                logging.warning(f"Existing file: '{path_8}' will be overwritten")
+
+            Image.fromarray(depth_8).save(path_8)
 
             # Colorize
             colored_save_path = os.path.join(
